@@ -176,5 +176,5 @@ if __name__ == '__main__':
     try:
         main()
     except KeyboardInterrupt:
-        os.system(os.getcwd()+"/save.py")
+        os.system("python3 save.py")
         sys.exit(0)
