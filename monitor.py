@@ -172,5 +172,9 @@ def main():
 				# and unavailability time
 				file.write(uptime_message + "\n")
 				file.write(unavailablity_time + "\n")
-
-main()
+if __name__ == '__main__':
+    try:
+        main()
+    except KeyboardInterrupt:
+        os.system(os.getcwd()+"/save.py")
+        sys.exit(0)
