@@ -1,8 +1,10 @@
 import os
 from csv import writer
+import openpyxl
+import csv
 FILE = os.path.join(os.getcwd(), "networkinfo.log")
 csv_file=os.path.join(os.getcwd(), "networkinfo.csv")
-
+excel_file=os.path.join(os.getcwd(), "networkinfo.xlsx")
 template=["Date","Disconnected at","Connected at","Disconnected duration"]
 with open(csv_file, 'w',newline="") as f_object:
   writer_object = writer(f_object)
@@ -25,8 +27,8 @@ for i in range(len(get_index)):
 
 
 dict_writer={"Date":"",
+              "Disconnected_at":"",
              "Connected_at":"",
-             "Disconnected_at":"",
              "Disconnected_duration":""}
 
 
@@ -74,3 +76,19 @@ for line in new_list:
     writer_object.writerow("")
     f_object.close()
 
+def csv_to_excel(csv_file, excel_file):
+    csv_data = []
+    with open(csv_file) as file_obj:
+        reader = csv.reader(file_obj)
+        for row in reader:
+            csv_data.append(row)
+
+    workbook = openpyxl.Workbook()
+    sheet = workbook.active
+    for row in csv_data:
+        sheet.append(row)
+    workbook.save(excel_file)
+
+
+if __name__ == "__main__":
+    csv_to_excel(csv_file, excel_file)
